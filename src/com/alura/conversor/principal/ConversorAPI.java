@@ -1,10 +1,8 @@
 package com.alura.conversor.principal;
 
+import com.alura.conversor.metodos.Conversion;
 import com.alura.conversor.metodos.ListaConversion;
-import com.alura.conversor.metodos.MonedaConversion;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,7 +17,13 @@ public class ConversorAPI {
 
     private String claveApi = connectionFile();
     private String direccion = "https://v6.exchangerate-api.com/v6/" +
-            claveApi + "/pair/";
+            claveApi + "/latest/";
+    private double factorConversion;
+
+    public double getFactorConversion() {
+        return factorConversion;
+    }
+
 
 
     // Aqui se asigna el APIKEY, este se excluye a traves del ignore
@@ -41,24 +45,14 @@ public class ConversorAPI {
     }
 
 
-    // Este Espacio es para pruebas
-    public ConversorAPI(){
-        System.out.println(claveApi);
-        ListaConversion v1 = new ListaConversion();
-        String seleccion = v1.getMonedas(1).getSimbolo();
-        System.out.println(seleccion);
-        System.out.println(direccion);
-
-    }
-
-    public ConversorAPI(int origen, int destino){
+    public ConversorAPI(Conversion operacionUsuario){
 
         // Aqui se buscan y asignan los valores a convertir
-        ListaConversion v1 = new ListaConversion();
-        String monedaOrigen = v1.getMonedas(origen).getSimbolo();
-        String monedaDestino = v1.getMonedas(destino).getSimbolo();
 
-        String direccionFinal = direccion + monedaOrigen + "/" + monedaDestino;
+        String monedaOrigen = operacionUsuario.getOrigenMoneda().getSimbolo();
+        String monedaDestino = operacionUsuario.getDestinoMoneda().getSimbolo();
+
+        String direccionFinal = direccion + monedaOrigen;
 
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
@@ -74,14 +68,21 @@ public class ConversorAPI {
             HttpResponse<String> response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
 
-            String json = response.body();
-            System.out.println(json);
+            JsonElement elemento = JsonParser.parseString(response.body());
+            JsonObject objectRoot = elemento.getAsJsonObject();
 
-            MonedaConversion miConversion = gson.fromJson(json, MonedaConversion.class);
+            JsonObject rates = objectRoot.getAsJsonObject("conversion_rates");
+
+            // Aqui se asigna el valor obtenido a la variable
+            this.factorConversion = rates.get(monedaDestino).getAsDouble();
+
+
 
 
         } catch (Exception e){
             System.out.println(e.getMessage());
+            this.factorConversion = 0;
+
         }
 
 
