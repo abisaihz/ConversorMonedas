@@ -15,14 +15,14 @@ public class Main {
         // Creo una lista para ver el historial
         List<ValorConversion> operaciones = new ArrayList<>();
 
-        System.out.println("Bienvenido al CONVERSOR DE MONEDAS");
+        System.out.println("Bienvenido/a al CONVERSOR DE MONEDAS");
         System.out.println("Puede escribir 'salir' en cualquier momento para terminar el programa.");
         System.out.println("Por favor capture cualquiera de las tasas disponibles: ");
         // Creamos la lista de monedas disponibles
         ListaConversion lista = new ListaConversion();
         for (int i = 0; i < 8; i++){
 
-            System.out.println(i + ": --- " + lista.getMonedas(i).toString());
+            System.out.println(i + ") --- " + lista.getMonedas(i).toString());
         }
 
 
