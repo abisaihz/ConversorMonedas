@@ -6,13 +6,13 @@ Este proyecto es una aplicación simple que permite convertir valores entre dife
 
 ## 📋 Tabla de contenido
 
-- [Descripción](#descripción)
-- [Características](#características)
-- [Tecnologías utilizadas](#tecnologías-utilizadas)
-- [Ejemplo de ejecución](#ejemplo-de-ejecución)
-- [Consideraciones Importantes](#consideraciones-importantes)
-- [Posibles Mejores](#posibles-mejoras)
-- [Créditos](#créditos)
+- [Descripción](#-descripción)
+- [Características](#-características)
+- [Tecnologías utilizadas](#-tecnologías-utilizadas)
+- [Ejemplo de ejecución](#-ejemplo-de-ejecución)
+- [Consideraciones Importantes](#-consideraciones-importantes)
+- [Posibles Mejores](#-posibles-mejoras)
+- [Créditos](#-créditos)
 
 
 ---
@@ -40,7 +40,7 @@ Utiliza una API de tasas de cambio en tiempo real que permite obtener la informa
 
 ---
 
-## ▶️ Ejemplo de Ejecucion
+## 💻 Ejemplo de Ejecución
 Durante la ejecución es posible seleccionar los dos tipos de cambio a los que se desea convertir. La aplicacion mostrará
 el siguiente listado y mensaje al iniciar:
 
@@ -110,5 +110,5 @@ Cualquiera de estas dos opciones funcionará correctamente para implementar una 
 - Implementar nuevas API's
 
 
-## 👨‍💻 Creditos
+## 👨‍💻 Créditos
 Abisai Hernandez - Desarrollador
